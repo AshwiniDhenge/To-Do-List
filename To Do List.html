@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>To-Do List</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #5c4b4b;
+  }
+
+  .container {
+    max-width: 300px;
+    margin: 25px auto;
+    padding: 15px;
+    background-color: #dbbfbf;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+  }
+
+  h1 {
+    text-align: justify;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 2px solid #190606;
+  }
+
+  input[type="checkbox"] {
+    margin-right: 15px;
+  }
+
+  .task {
+    flex-grow: 1;
+  }
+
+  input[type="text"] {
+    width: 90%;
+    padding: 10px;
+    border: 5px solid #e7dada;
+    border-radius: 5px;
+  }
+
+  button {
+    display: block;
+    margin: 15px auto;
+    padding: 9px 6px;
+    background-color: #000811;
+    color: #fff;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>To-Do List</h1>
+    <ul id="todo-list">
+      
+    </ul>
+    <input type="text" id="new-task" placeholder="Add task">
+    <button id="add-button">New Task</button>
+    
+  </div>
+
+  <script>
+    const addButton = document.getElementById('add-button');
+    const newTaskInput = document.getElementById('new-task');
+    const todoList = document.getElementById('todo-list');
+
+    addButton.addEventListener('click', () => {
+      const taskText = newTaskInput.value.trim();
+      if (taskText !== '') {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <input type="checkbox">
+          <span class="task">${taskText}</span>
+         <button class="delete-button">Clear</button>
+         `;
+        todoList.appendChild(li);
+        newTaskInput.value = '';
+      }
+    });
+
+    todoList.addEventListener('click', (event) => {
+      if (event.target.classList.contains('delete-button')) {
+        event.target.parentElement.remove();
+      }
+    });
+  </script>
+</body>
+</html>
